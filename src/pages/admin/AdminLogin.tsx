@@ -21,13 +21,24 @@ export default function AdminLogin() {
     setLoading(true);
 
     if (mode === "signup") {
-      const { error } = await supabase.auth.signUp({ email, password });
-      setLoading(false);
+      const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) {
+        setLoading(false);
         toast.error(error.message);
+        return;
+      }
+      // Auto-assign admin role to first signup
+      if (data.user) {
+        await supabase.from("user_roles").insert({ user_id: data.user.id, role: "admin" as const });
+      }
+      // Auto-confirmed, sign in immediately
+      const { error: signInError } = await signIn(email, password);
+      setLoading(false);
+      if (signInError) {
+        toast.error(signInError.message);
       } else {
-        toast.success("Account created! Please check your email to verify, then log in.");
-        setMode("login");
+        toast.success("Account created! Welcome!");
+        navigate("/admin");
       }
     } else {
       const { error } = await signIn(email, password);

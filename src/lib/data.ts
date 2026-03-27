@@ -30,7 +30,7 @@ export const testimonials = [
 ];
 
 export const contactInfo = {
-  address: "GF Banke Lal Market, Badarpur, New Delhi – 110044",
+  address: "323 Ground Floor, Bankey Lal Market, Badarpur, New Delhi, Delhi 110044",
   whatsapp: "7289999300",
   email: "info@eitc.co.in",
   website: "www.eitc.co.in",
