@@ -29,6 +29,7 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
     <>
       <Navbar />
       {children}
+      <Newsletter />
       <Footer />
     </>
   );
