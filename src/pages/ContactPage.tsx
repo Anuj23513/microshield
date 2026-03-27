@@ -47,7 +47,7 @@ export default function ContactPage() {
               <div className="flex items-start gap-3"><Mail className="w-5 h-5 text-primary shrink-0" /><div><p className="font-medium text-foreground">Email</p><p className="text-sm text-muted-foreground">{contactInfo.email}</p></div></div>
             </div>
             <div className="glass-card overflow-hidden rounded-2xl h-64">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.2!2d77.3!3d28.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDMwJzAwLjAiTiA3N8KwMTgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1" className="w-full h-full border-0" allowFullScreen loading="lazy" title="Location" />
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.8!2d77.302!3d28.512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1a3a3a3a3a3%3A0x0!2sBanke+Lal+Market%2C+Badarpur%2C+New+Delhi!5e0!3m2!1sen!2sin!4v1" className="w-full h-full border-0" allowFullScreen loading="lazy" title="Location" />
             </div>
           </motion.div>
 
