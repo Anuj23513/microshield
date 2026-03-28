@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Sun, Moon, Phone } from "lucide-react";
+import { Menu, X, Sun, Moon, Phone, Shield } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,10 +42,13 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button onClick={toggle} className="p-2 rounded-lg hover:bg-secondary transition-colors">
             {isDark ? <Sun className="w-4 h-4 text-foreground" /> : <Moon className="w-4 h-4 text-foreground" />}
           </button>
+          <Link to="/admin/login" className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-colors">
+            <Shield className="w-4 h-4" /> Admin
+          </Link>
           <a
             href="https://wa.me/917289999300"
             target="_blank"
@@ -89,6 +92,9 @@ export function Navbar() {
               >
                 <Phone className="w-4 h-4" /> WhatsApp Us
               </a>
+              <Link to="/admin/login" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground p-2 rounded-lg hover:bg-secondary transition-colors">
+                <Shield className="w-4 h-4" /> Admin Login
+              </Link>
             </div>
           </motion.div>
         )}
