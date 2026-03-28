@@ -2,53 +2,27 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import { motion } from "framer-motion";
-import { Lock, Mail, ArrowLeft, UserPlus, LogIn } from "lucide-react";
+import { Lock, Mail, ArrowLeft, LogIn } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [mode, setMode] = useState<"login" | "signup">("login");
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) { toast.error("Please fill all fields"); return; }
-    if (password.length < 6) { toast.error("Password must be at least 6 characters"); return; }
     setLoading(true);
-
-    if (mode === "signup") {
-      const { data, error } = await supabase.auth.signUp({ email, password });
-      if (error) {
-        setLoading(false);
-        toast.error(error.message);
-        return;
-      }
-      // Auto-assign admin role to first signup
-      if (data.user) {
-        await supabase.from("user_roles").insert({ user_id: data.user.id, role: "admin" as const });
-      }
-      // Auto-confirmed, sign in immediately
-      const { error: signInError } = await signIn(email, password);
-      setLoading(false);
-      if (signInError) {
-        toast.error(signInError.message);
-      } else {
-        toast.success("Account created! Welcome!");
-        navigate("/admin");
-      }
+    const { error } = await signIn(email, password);
+    setLoading(false);
+    if (error) {
+      toast.error(error.message);
     } else {
-      const { error } = await signIn(email, password);
-      setLoading(false);
-      if (error) {
-        toast.error(error.message);
-      } else {
-        toast.success("Welcome back!");
-        navigate("/admin");
-      }
+      toast.success("Welcome back!");
+      navigate("/admin");
     }
   };
 
@@ -59,12 +33,8 @@ export default function AdminLogin() {
           <div className="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-4">
             <Lock className="w-7 h-7 text-primary-foreground" />
           </div>
-          <h1 className="text-2xl font-heading font-bold text-foreground">
-            {mode === "login" ? "Admin Login" : "Create Account"}
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            {mode === "login" ? "Sign in to manage your website" : "Create your admin account"}
-          </p>
+          <h1 className="text-2xl font-heading font-bold text-foreground">Admin Login</h1>
+          <p className="text-sm text-muted-foreground mt-1">Sign in to manage your website</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -82,18 +52,10 @@ export default function AdminLogin() {
             </div>
           </div>
           <button type="submit" disabled={loading} className="w-full gradient-bg text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
-            {mode === "login" ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
-            {loading ? (mode === "login" ? "Signing in..." : "Creating account...") : (mode === "login" ? "Sign In" : "Create Account")}
+            <LogIn className="w-4 h-4" />
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        <div className="mt-4 text-center">
-          <button
-            onClick={() => setMode(mode === "login" ? "signup" : "login")}
-            className="text-sm text-primary hover:underline transition-colors"
-          >
-            {mode === "login" ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
-          </button>
-        </div>
         <div className="mt-4 text-center">
           <a href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
             <ArrowLeft className="w-3 h-3" /> Back to website
