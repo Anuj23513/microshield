@@ -42,10 +42,13 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button onClick={toggle} className="p-2 rounded-lg hover:bg-secondary transition-colors">
             {isDark ? <Sun className="w-4 h-4 text-foreground" /> : <Moon className="w-4 h-4 text-foreground" />}
           </button>
+          <Link to="/admin/login" className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-colors">
+            <Shield className="w-4 h-4" /> Admin
+          </Link>
           <a
             href="https://wa.me/917289999300"
             target="_blank"
