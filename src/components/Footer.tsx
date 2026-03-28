@@ -19,7 +19,10 @@ export function Footer() {
             <p className="text-muted-foreground text-sm max-w-sm mb-4">
               Excellence Impex Trading Co. — India's leading supplier of Microshield Liquid Glass Screen Protector and accessories.
             </p>
-            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Excellence Impex Trading Co. All rights reserved.</p>
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <span>© {new Date().getFullYear()} Excellence Impex Trading Co. All rights reserved.</span>
+              <Link to="/admin/login" className="hover:text-primary transition-colors">Admin</Link>
+            </div>
           </div>
 
           <div>
