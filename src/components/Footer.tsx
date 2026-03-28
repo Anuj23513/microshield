@@ -34,9 +34,15 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-foreground mb-4">Contact</h4>
             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <div className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /><span>{contactInfo.address}</span></div>
-              <div className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /><span>{contactInfo.whatsapp}</span></div>
-              <div className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /><span>{contactInfo.email}</span></div>
+              <a href={`https://maps.google.com/?q=${encodeURIComponent(contactInfo.address)}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 hover:text-primary transition-colors">
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0" /><span>{contactInfo.address}</span>
+              </a>
+              <a href={`tel:${contactInfo.whatsapp}`} className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Phone className="w-4 h-4 shrink-0" /><span>{contactInfo.whatsapp}</span>
+              </a>
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Mail className="w-4 h-4 shrink-0" /><span>{contactInfo.email}</span>
+              </a>
             </div>
           </div>
         </div>
