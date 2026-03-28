@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Sun, Moon, Phone } from "lucide-react";
+import { Menu, X, Sun, Moon, Phone, Shield } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { motion, AnimatePresence } from "framer-motion";
 
