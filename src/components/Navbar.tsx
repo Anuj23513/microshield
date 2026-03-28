@@ -92,6 +92,9 @@ export function Navbar() {
               >
                 <Phone className="w-4 h-4" /> WhatsApp Us
               </a>
+              <Link to="/admin/login" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2 text-sm font-medium text-muted-foreground p-2 rounded-lg hover:bg-secondary transition-colors">
+                <Shield className="w-4 h-4" /> Admin Login
+              </Link>
             </div>
           </motion.div>
         )}
