@@ -86,6 +86,17 @@ export default function AdminSettings() {
         <div className="glass-card p-6 space-y-4">
           <h2 className="font-heading font-semibold text-foreground flex items-center gap-2"><KeyRound className="w-4 h-4" /> Account Security</h2>
           <div>
+            <label className="text-sm font-medium text-foreground mb-1 block">Display Name / Username</label>
+            <div className="flex gap-2">
+              <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} type="text" placeholder="Admin Name" className="flex-1 px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+              <button onClick={async () => {
+                if (!displayName.trim()) { toast.error("Enter a display name"); return; }
+                const { error } = await supabase.auth.updateUser({ data: { display_name: displayName.trim() } });
+                if (error) toast.error(error.message); else toast.success("Display name updated!");
+              }} className="gradient-bg text-primary-foreground px-4 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">Update</button>
+            </div>
+          </div>
+          <div>
             <label className="text-sm font-medium text-foreground mb-1 block">Change Email</label>
             <div className="flex gap-2">
               <input value={newEmail} onChange={(e) => setNewEmail(e.target.value)} type="email" placeholder="new-email@example.com" className="flex-1 px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
