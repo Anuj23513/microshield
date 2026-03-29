@@ -22,6 +22,14 @@ export default function AdminSettings() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+
+  // Load display name from user metadata
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setDisplayName(data.user?.user_metadata?.display_name || "");
+    });
+  }, []);
 
   useEffect(() => {
     setForm({
