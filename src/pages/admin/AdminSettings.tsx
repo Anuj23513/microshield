@@ -1,4 +1,4 @@
-import { Save, KeyRound } from "lucide-react";
+import { Save, KeyRound, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
