@@ -18,7 +18,7 @@ export default function AdminSettings() {
     },
   });
 
-  const [form, setForm] = useState({ site_name: "", whatsapp: "", meta_title: "", meta_description: "" });
+  const [form, setForm] = useState({ site_name: "", whatsapp: "", email: "", address: "", meta_title: "", meta_description: "" });
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,6 +27,8 @@ export default function AdminSettings() {
     setForm({
       site_name: settings.site_name || "Microshield",
       whatsapp: settings.whatsapp || "7289999300",
+      email: settings.email || "info@eitc.co.in",
+      address: settings.address || "323 Ground Floor, Bankey Lal Market, Badarpur, New Delhi, Delhi 110044",
       meta_title: settings.meta_title || "Microshield Liquid Glass Screen Protector",
       meta_description: settings.meta_description || "India's #1 liquid glass screen protector. 9H hardness, antimicrobial coating.",
     });
@@ -100,6 +102,8 @@ export default function AdminSettings() {
           <h2 className="font-heading font-semibold text-foreground">General</h2>
           <div><label className="text-sm font-medium text-foreground mb-1 block">Website Name</label><input value={form.site_name} onChange={(e) => setForm({ ...form, site_name: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring" /></div>
           <div><label className="text-sm font-medium text-foreground mb-1 block">WhatsApp Number</label><input value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring" /></div>
+          <div><label className="text-sm font-medium text-foreground mb-1 block">Email</label><input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring" /></div>
+          <div><label className="text-sm font-medium text-foreground mb-1 block">Address</label><textarea value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} rows={2} className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" /></div>
         </div>
 
         {/* SEO */}

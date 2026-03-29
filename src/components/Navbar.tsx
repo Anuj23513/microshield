@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Menu, X, Sun, Moon, Phone, Shield } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { motion, AnimatePresence } from "framer-motion";
+import { useContactInfo } from "@/hooks/use-site-settings";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -15,6 +16,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const { isDark, toggle } = useTheme();
   const location = useLocation();
+  const contactInfo = useContactInfo();
 
   return (
     <nav className="glass-nav fixed top-0 left-0 right-0 z-50">
@@ -50,7 +52,7 @@ export function Navbar() {
             <Shield className="w-4 h-4" /> Admin
           </Link>
           <a
-            href="https://wa.me/917289999300"
+            href={`https://wa.me/91${contactInfo.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:flex items-center gap-2 gradient-bg text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
@@ -85,7 +87,7 @@ export function Navbar() {
                 </Link>
               ))}
               <a
-                href="https://wa.me/917289999300"
+                href={`https://wa.me/91${contactInfo.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 gradient-bg text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium"

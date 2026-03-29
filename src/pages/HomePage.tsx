@@ -5,6 +5,7 @@ import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import productHero from "@/assets/product-hero.png";
 import { features, testimonials } from "@/lib/data";
+import { useContactInfo } from "@/hooks/use-site-settings";
 
 const iconMap: Record<string, React.ReactNode> = {
   shield: <Shield className="w-6 h-6" />,
@@ -22,6 +23,7 @@ const fadeUp = {
 
 export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const contactInfo = useContactInfo();
 
   return (
     <div className="min-h-screen">
@@ -165,7 +167,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">Ready to Protect Your Business?</h2>
             <p className="text-primary-foreground/80 max-w-lg mx-auto mb-8">Join 500+ retailers across India who trust Microshield. Become a distributor today.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="https://wa.me/917289999300" target="_blank" rel="noopener noreferrer" className="bg-background text-foreground px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
+              <a href={`https://wa.me/91${contactInfo.whatsapp}`} target="_blank" rel="noopener noreferrer" className="bg-background text-foreground px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
                 WhatsApp Us Now
               </a>
               <Link to="/contact" className="border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 rounded-xl font-medium hover:bg-primary-foreground/10 transition-colors">
