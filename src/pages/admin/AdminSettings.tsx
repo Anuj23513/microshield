@@ -27,6 +27,8 @@ export default function AdminSettings() {
     setForm({
       site_name: settings.site_name || "Microshield",
       whatsapp: settings.whatsapp || "7289999300",
+      email: settings.email || "info@eitc.co.in",
+      address: settings.address || "323 Ground Floor, Bankey Lal Market, Badarpur, New Delhi, Delhi 110044",
       meta_title: settings.meta_title || "Microshield Liquid Glass Screen Protector",
       meta_description: settings.meta_description || "India's #1 liquid glass screen protector. 9H hardness, antimicrobial coating.",
     });
