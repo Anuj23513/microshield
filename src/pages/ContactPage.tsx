@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
-import { contactInfo } from "@/lib/data";
+import { useContactInfo } from "@/hooks/use-site-settings";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 export default function ContactPage() {
+  const contactInfo = useContactInfo();
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [sending, setSending] = useState(false);
 
@@ -16,7 +17,6 @@ export default function ContactPage() {
       return;
     }
     setSending(true);
-    // Save to database
     const { error } = await supabase.from("leads").insert({ name: form.name.trim(), phone: form.phone.trim(), message: form.message.trim() });
     setSending(false);
     if (error) {
@@ -24,7 +24,6 @@ export default function ContactPage() {
       return;
     }
     toast.success("Message sent! We'll get back to you soon.");
-    // Also open WhatsApp
     const msg = encodeURIComponent(`Name: ${form.name}\nPhone: ${form.phone}\nMessage: ${form.message}`);
     window.open(`https://wa.me/91${contactInfo.whatsapp}?text=${msg}`, "_blank");
     setForm({ name: "", phone: "", message: "" });
@@ -42,9 +41,18 @@ export default function ContactPage() {
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
             <div className="glass-card p-6 space-y-4">
               <h2 className="font-heading font-semibold text-foreground text-xl">Get In Touch</h2>
-              <div className="flex items-start gap-3"><MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" /><div><p className="font-medium text-foreground">Address</p><p className="text-sm text-muted-foreground">{contactInfo.address}</p></div></div>
-              <div className="flex items-start gap-3"><Phone className="w-5 h-5 text-primary shrink-0" /><div><p className="font-medium text-foreground">WhatsApp</p><p className="text-sm text-muted-foreground">{contactInfo.whatsapp}</p></div></div>
-              <div className="flex items-start gap-3"><Mail className="w-5 h-5 text-primary shrink-0" /><div><p className="font-medium text-foreground">Email</p><p className="text-sm text-muted-foreground">{contactInfo.email}</p></div></div>
+              <a href={`https://maps.google.com/?q=${encodeURIComponent(contactInfo.address)}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-primary transition-colors">
+                <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                <div><p className="font-medium text-foreground">Address</p><p className="text-sm text-muted-foreground">{contactInfo.address}</p></div>
+              </a>
+              <a href={`tel:${contactInfo.whatsapp}`} className="flex items-start gap-3 hover:text-primary transition-colors">
+                <Phone className="w-5 h-5 text-primary shrink-0" />
+                <div><p className="font-medium text-foreground">WhatsApp</p><p className="text-sm text-muted-foreground">{contactInfo.whatsapp}</p></div>
+              </a>
+              <a href={`mailto:${contactInfo.email}`} className="flex items-start gap-3 hover:text-primary transition-colors">
+                <Mail className="w-5 h-5 text-primary shrink-0" />
+                <div><p className="font-medium text-foreground">Email</p><p className="text-sm text-muted-foreground">{contactInfo.email}</p></div>
+              </a>
             </div>
             <div className="glass-card overflow-hidden rounded-2xl h-64">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.8!2d77.302!3d28.512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1a3a3a3a3a3%3A0x0!2sBanke+Lal+Market%2C+Badarpur%2C+New+Delhi!5e0!3m2!1sen!2sin!4v1" className="w-full h-full border-0" allowFullScreen loading="lazy" title="Location" />
