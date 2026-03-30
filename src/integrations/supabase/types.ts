@@ -71,6 +71,42 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer_en: string
+          answer_hi: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          question_en: string
+          question_hi: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          answer_en: string
+          answer_hi?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          question_en: string
+          question_hi?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          answer_en?: string
+          answer_hi?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          question_en?: string
+          question_hi?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
