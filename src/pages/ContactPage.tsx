@@ -70,7 +70,7 @@ export default function ContactPage() {
               </a>
             </div>
             <div className="glass-card overflow-hidden rounded-2xl h-64">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.8!2d77.302!3d28.512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1a3a3a3a3a3%3A0x0!2sBanke+Lal+Market%2C+Badarpur%2C+New+Delhi!5e0!3m2!1sen!2sin!4v1" className="w-full h-full border-0" allowFullScreen loading="lazy" title="Location" />
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.297589972946!2d77.29941517408832!3d28.500692990057992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce72192afda19%3A0x2fc2402ef4a515!2sDevraj%20Creation%20Jewellery%20%26%20Gemstones!5e0!3m2!1sen!2sin!4v1774852527397!5m2!1sen!2sin" className="w-full h-full border-0" style={{ borderRadius: "12px" }} allowFullScreen loading="lazy" title="Location" />
             </div>
           </motion.div>
 

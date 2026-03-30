@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon, Phone, Shield } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContactInfo } from "@/hooks/use-site-settings";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -22,9 +23,7 @@ export function Navbar() {
     <nav className="glass-nav fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
-            <span className="text-primary-foreground font-heading font-bold text-sm">E</span>
-          </div>
+          <img src={logo} alt="MicroShield Logo" className="h-10 w-auto" width={40} height={40} />
           <span className="font-heading font-bold text-lg text-foreground">
             Micro<span className="gradient-text">shield</span>
           </span>
