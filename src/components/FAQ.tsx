@@ -1,26 +1,25 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 
 type Lang = "en" | "hi";
 
-const faqs: Record<Lang, { q: string; a: string }[]> = {
-  en: [
-    { q: "What is 9H hardness?", a: "9H hardness refers to high scratch resistance level, making the screen more durable." },
-    { q: "Which devices is this liquid suitable for?", a: "It can be used on smartphones, smartwatches, tablets, cameras, and laptops." },
-    { q: "Can the liquid glass be removed?", a: "It bonds with the screen. Removal requires a chemical process and is not recommended." },
-    { q: "Does the product come with warranty?", a: "No, this product does not come with any warranty or guarantee." },
-    { q: "Does it affect touch sensitivity?", a: "No, it maintains original touch sensitivity." },
-  ],
-  hi: [
-    { q: "9H हार्डनेस क्या होता है?", a: "9H हार्डनेस उच्च स्क्रैच रेजिस्टेंस को दर्शाता है, जिससे स्क्रीन अधिक सुरक्षित रहती है।" },
-    { q: "यह लिक्विड किन डिवाइस पर इस्तेमाल कर सकते हैं?", a: "इसे मोबाइल, स्मार्ट वॉच, टैबलेट, कैमरा और लैपटॉप पर इस्तेमाल किया जा सकता है।" },
-    { q: "क्या इसे हटाया जा सकता है?", a: "यह स्क्रीन से जुड़ जाता है, इसे हटाने के लिए केमिकल प्रोसेस की आवश्यकता होती है।" },
-    { q: "क्या इस प्रोडक्ट की वारंटी है?", a: "नहीं, इस प्रोडक्ट पर कोई वारंटी नहीं दी जाती है।" },
-    { q: "क्या इससे टच पर असर पड़ता है?", a: "नहीं, यह टच सेंसिटिविटी को प्रभावित नहीं करता।" },
-  ],
-};
+interface FaqRow {
+  id: string;
+  question_en: string;
+  answer_en: string;
+  question_hi: string;
+  answer_hi: string;
+  sort_order: number;
+  is_active: boolean;
+}
+
+const fallbackFaqs: FaqRow[] = [
+  { id: "1", question_en: "What is 9H hardness?", answer_en: "9H hardness refers to high scratch resistance level, making the screen more durable.", question_hi: "9H हार्डनेस क्या होता है?", answer_hi: "9H हार्डनेस उच्च स्क्रैच रेजिस्टेंस को दर्शाता है, जिससे स्क्रीन अधिक सुरक्षित रहती है।", sort_order: 1, is_active: true },
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -37,16 +36,19 @@ export default function FAQ() {
     localStorage.setItem("faq-lang", lang);
   }, [lang]);
 
+  const { data: faqs = fallbackFaqs } = useQuery({
+    queryKey: ["faqs"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("faqs").select("*").eq("is_active", true).order("sort_order");
+      if (error) throw error;
+      return (data as FaqRow[]).length > 0 ? (data as FaqRow[]) : fallbackFaqs;
+    },
+  });
+
   return (
     <section className="py-20 bg-card">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="text-center mb-12"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
             <HelpCircle className="w-4 h-4" /> FAQs
           </div>
@@ -56,56 +58,28 @@ export default function FAQ() {
           <p className="text-muted-foreground max-w-lg mx-auto mb-8">
             {lang === "en" ? "Everything you need to know about MicroShield Liquid Glass." : "MicroShield लिक्विड ग्लास के बारे में सब कुछ जानें।"}
           </p>
-
-          {/* Language Toggle */}
           <div className="inline-flex rounded-xl border border-border bg-background p-1 gap-1">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                lang === "en"
-                  ? "gradient-bg text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
-            >
+            <button onClick={() => setLang("en")} className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${lang === "en" ? "gradient-bg text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
               English
             </button>
-            <button
-              onClick={() => setLang("hi")}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                lang === "hi"
-                  ? "gradient-bg text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
-            >
+            <button onClick={() => setLang("hi")} className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${lang === "hi" ? "gradient-bg text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}>
               हिंदी
             </button>
           </div>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="max-w-3xl mx-auto"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
-            {faqs[lang].map((faq, i) => (
-              <AccordionItem
-                key={`${lang}-${i}`}
-                value={`item-${i}`}
-                className="glass-card border border-border rounded-xl px-6 overflow-hidden hover:shadow-lg transition-shadow duration-300"
-              >
+            {faqs.map((faq, i) => (
+              <AccordionItem key={faq.id} value={faq.id} className="glass-card border border-border rounded-xl px-6 overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <AccordionTrigger className="text-left text-foreground font-medium hover:no-underline py-5">
                   <span className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold shrink-0">
-                      {i + 1}
-                    </span>
-                    {faq.q}
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm font-bold shrink-0">{i + 1}</span>
+                    {lang === "en" ? faq.question_en : (faq.question_hi || faq.question_en)}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pb-5 pl-11">
-                  {faq.a}
+                  {lang === "en" ? faq.answer_en : (faq.answer_hi || faq.answer_en)}
                 </AccordionContent>
               </AccordionItem>
             ))}
