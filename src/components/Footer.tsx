@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContactInfo } from "@/hooks/use-site-settings";
 import { Phone, Mail } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpeg";
 
 export function Footer() {
   const contactInfo = useContactInfo();

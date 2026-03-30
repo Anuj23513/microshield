@@ -4,7 +4,7 @@ import { Menu, X, Sun, Moon, Phone, Shield } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContactInfo } from "@/hooks/use-site-settings";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpeg";
 
 const navLinks = [
   { to: "/", label: "Home" },
