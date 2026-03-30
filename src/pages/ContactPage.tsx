@@ -12,8 +12,23 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) {
+    const name = form.name.trim();
+    const phone = form.phone.trim();
+    const message = form.message.trim();
+    if (!name || !phone || !message) {
       toast.error("Please fill all fields");
+      return;
+    }
+    if (name.length > 200) {
+      toast.error("Name is too long (max 200 characters)");
+      return;
+    }
+    if (!/^[0-9+\-\s()]{7,20}$/.test(phone)) {
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+    if (message.length > 1000) {
+      toast.error("Message is too long (max 1000 characters)");
       return;
     }
     setSending(true);
