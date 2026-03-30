@@ -18,6 +18,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminCategories from "./pages/admin/AdminCategories";
 import AdminContent from "./pages/admin/AdminContent";
+import AdminFAQs from "./pages/admin/AdminFAQs";
 import AdminMedia from "./pages/admin/AdminMedia";
 import AdminLeads from "./pages/admin/AdminLeads";
 import AdminSettings from "./pages/admin/AdminSettings";
@@ -56,6 +57,7 @@ const App = () => (
               <Route path="content" element={<AdminContent />} />
               <Route path="media" element={<AdminMedia />} />
               <Route path="leads" element={<AdminLeads />} />
+              <Route path="faqs" element={<AdminFAQs />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
             <Route path="*" element={<NotFound />} />
