@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, Outlet, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Package, FolderOpen, FileText, Image, MessageSquare, Settings, LogOut, Menu, X, Sun, Moon } from "lucide-react";
+import { LayoutDashboard, Package, FolderOpen, FileText, Image, MessageSquare, Settings, LogOut, Menu, X, Sun, Moon, HelpCircle } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { useAuth } from "@/lib/auth";
 
@@ -11,6 +11,7 @@ const sidebarLinks = [
   { to: "/admin/content", icon: FileText, label: "Content" },
   { to: "/admin/media", icon: Image, label: "Media" },
   { to: "/admin/leads", icon: MessageSquare, label: "Leads" },
+  { to: "/admin/faqs", icon: HelpCircle, label: "FAQs" },
   { to: "/admin/settings", icon: Settings, label: "Settings" },
 ];
 
