@@ -164,26 +164,7 @@ export default function HomePage() {
       {/* FAQ */}
       <FAQ />
 
-      {/* Find Us Map */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">Find Us</h2>
-            <p className="text-muted-foreground">Visit our office in New Delhi</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto glass-card overflow-hidden rounded-2xl">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.297589972946!2d77.29941517408832!3d28.500692990057992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce72192afda19%3A0x2fc2402ef4a515!2sDevraj%20Creation%20Jewellery%20%26%20Gemstones!5e0!3m2!1sen!2sin!4v1774852527397!5m2!1sen!2sin"
-              width="100%"
-              height="400"
-              style={{ border: 0, borderRadius: "12px" }}
-              allowFullScreen
-              loading="lazy"
-              title="Our Location"
-            />
-          </motion.div>
-        </div>
-      </section>
+
 
       {/* CTA */}
       <section className="py-20">
