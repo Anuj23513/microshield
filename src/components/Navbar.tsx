@@ -23,7 +23,7 @@ export function Navbar() {
     <nav className="glass-nav fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="MicroShield Logo" className="h-10 w-auto" width={40} height={40} />
+          <img src={logo} alt="MicroShield Logo" className="h-10 w-10 rounded-full object-cover" width={40} height={40} />
           <span className="font-heading font-bold text-lg text-foreground">
             Micro<span className="gradient-text">shield</span>
           </span>
