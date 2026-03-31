@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import { useContactInfo } from "@/hooks/use-site-settings";
-import { Phone, Mail } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 export function Footer() {
-  const contactInfo = useContactInfo();
 
   return (
     <footer className="bg-card border-t border-border">
@@ -23,14 +20,6 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <a href={`tel:${contactInfo.whatsapp}`} className="flex items-center gap-1.5 hover:text-primary transition-colors">
-              <Phone className="w-3.5 h-3.5" /> {contactInfo.whatsapp}
-            </a>
-            <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-1.5 hover:text-primary transition-colors">
-              <Mail className="w-3.5 h-3.5" /> {contactInfo.email}
-            </a>
-          </div>
         </div>
         <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
           <span>© {new Date().getFullYear()} Excellence Impex Trading Co.</span>
