@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.jpeg";
 
 export function Footer() {
-  const contactInfo = useContactInfo();
 
   return (
     <footer className="bg-card border-t border-border">
