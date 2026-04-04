@@ -6,6 +6,7 @@ import { AuthProvider } from "@/lib/auth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { InstallPrompt } from "@/components/InstallPrompt";
 
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
